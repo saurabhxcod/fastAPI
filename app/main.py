@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from .schemas.api import ApiResponse
-
+from .schemas.user import UserDTO
 app = FastAPI()
 
 @app.get("/",response_model=ApiResponse)
@@ -10,6 +10,11 @@ def home():
 @app.get("/about")
 def about():
     return {"This is a about page"}   
+
+
+@app.post("/users",response_model=ApiResponse)
+def create_user(user:UserDTO):
+    return ApiResponse(message=f"User {user.firstName} {user.lastName} created successfully",status="OK",success=True)
 
 
 @app.put("/users/{user_id}/name/{user_name}")
