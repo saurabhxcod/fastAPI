@@ -11,6 +11,20 @@ def home():
 def about():
     return {"This is a about page"}   
 
+
+@app.put("/users/{user_id}/name/{user_name}")
+def update_users(user_id:int,user_name:str):
+    return ApiResponse(message=f"Updated user {user_name} successfully",status="OK",success=True)
+
+@app.get("/users/search")
+def search_users(firstName:str="None",lastName:str="None",age:int=0):
+    return ApiResponse(message=f"Users filtered successfully for first name {firstName} and last name {lastName} and age {age}",status="OK",success=True)
+    
+@app.get("/users/{user_id}")
+def get_user(user_id:int):
+    return ApiResponse(message=f"User details retrieved successfully for user id {user_id}",status="OK",success=True)
+
+
 @app.get("/contact")
 def contact():
     return {"This is a contact page"}
